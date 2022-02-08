@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <modules>
+        <module>awesome-export-core</module>
+        <module>awesome-export-autoconfigure</module>
+    </modules>
+
+    <groupId>io.ggit.awesome</groupId>
+    <artifactId>awesome-export-parent</artifactId>
+    <version>0.0.1-RC1</version>
+    <packaging>pom</packaging>
+    <name>awesome-export</name>
+    <description>awesome-export</description>
+
+
+    <organization>
+        <name>ggit</name>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>harryczqp</id>
+            <name>harryczqp</name>
+            <email>harryczq@hotmail.com</email>
+            <roles>
+                <role>Developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>false</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
