@@ -3,7 +3,10 @@ package io.ggit.awesome.utils;
 /**
  * BasicUtil
  *
- * @author harryczqp
+ * @author harryczq
  */
 public class BasicUtil {
+
+
+
 }
