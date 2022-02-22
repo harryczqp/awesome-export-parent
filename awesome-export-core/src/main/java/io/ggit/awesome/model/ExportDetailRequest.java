@@ -1,15 +1,22 @@
 package io.ggit.awesome.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * ExportDetail
  *
  * @author harryczq
  */
+@ApiModel("标准导出明细请映射关系")
 public class ExportDetailRequest {
-
+    @ApiModelProperty("显示列名")
     private String title;
+    @ApiModelProperty("字段名")
     private String fieldName;
+    @ApiModelProperty("排序 默认0")
     private Integer dataIndex = 0;
+    @ApiModelProperty("格式")
     private String format;
 
     public String getTitle() {
