@@ -1,4 +1,4 @@
-package io.ggit.awesome.utils;
+package io.ggit.awesome.export.utils;
 
 
 import cn.hutool.core.bean.BeanUtil;
@@ -8,7 +8,7 @@ import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.poi.excel.BigExcelWriter;
 import cn.hutool.poi.excel.ExcelUtil;
-import io.ggit.awesome.model.ExportDetailRequest;
+import io.ggit.awesome.export.model.ExportDetailRequest;
 
 import java.io.File;
 import java.util.*;

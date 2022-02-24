@@ -1,4 +1,4 @@
-package io.ggit.awesome.model;
+package io.ggit.awesome.export.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

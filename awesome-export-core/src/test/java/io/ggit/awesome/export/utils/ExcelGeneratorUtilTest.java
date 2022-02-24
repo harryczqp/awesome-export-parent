@@ -1,9 +1,9 @@
-package io.ggit.awesome.utils;
+package io.ggit.awesome.export.utils;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.RandomUtil;
-import io.ggit.awesome.model.ExportDetailRequest;
+import io.ggit.awesome.export.model.ExportDetailRequest;
 import org.junit.Assert;
 import org.junit.Test;
 

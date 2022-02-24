@@ -1,4 +1,4 @@
-package io.ggit.awesome.utils;
+package io.ggit.awesome.export.utils;
 
 /**
  * BasicUtil
