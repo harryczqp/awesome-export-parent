@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -97,6 +99,17 @@ public class BeanScanner implements ApplicationListener<ApplicationStartedEvent>
         if (clazz == null || method == null || keys == null) {
             return;
         }
-        // TODO: 2022/3/1 完善方法
+        RequestMapping requestMapping = AnnotationUtil.getAnnotation(clazz, RequestMapping.class);
+        String[] requestValues = requestMapping == null ? new String[]{""} : requestMapping.value();
+        PostMapping postMapping = AnnotationUtil.getAnnotation(method, PostMapping.class);
+        String[] postValues = postMapping == null ? new String[]{""} : postMapping.value();
+        for (String requestValue : requestValues) {
+            for (String postValue : postValues) {
+                if (CharSequenceUtil.isNotEmpty(postValue)) {
+                    keys.add(CharSequenceUtil.format("{}{}", requestValue, CharSequenceUtil.addPrefixIfNot(postValue, "/")));
+                }
+            }
+        }
     }
+
 }
