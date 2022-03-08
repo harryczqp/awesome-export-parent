@@ -1,10 +1,33 @@
 package io.ggit.awesome.export.spring.config;
 
+import cn.hutool.core.text.CharSequenceUtil;
+import cn.hutool.core.util.ArrayUtil;
+import io.ggit.awesome.export.spring.BeanScanner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
+import org.springframework.core.annotation.AnnotationAttributes;
+import org.springframework.core.type.AnnotationMetadata;
+
 /**
  * DownloadCenterExportRegistrar
  *
  * @author harryczq
  */
-public class DownloadCenterExportRegistrar {
-    // TODO: 2022/3/3 完善自动注册 
+public class DownloadCenterExportRegistrar implements ImportBeanDefinitionRegistrar {
+    private static final Logger log = LoggerFactory.getLogger(BeanScanner.class);
+
+    @Override
+    public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
+        AnnotationAttributes attributes = AnnotationAttributes.fromMap(importingClassMetadata.getAnnotationAttributes(EnableDownloadCenterExport.class.getName()));
+        String[] values = attributes != null ? attributes.getStringArray("value") : new String[0];
+        String strValues = ArrayUtil.join(values, ",");
+        if (CharSequenceUtil.isNotEmpty(strValues)) {
+            log.debug("下载中心注册-{}！", values);
+        }
+        registry.registerBeanDefinition(BeanScanner.class.getName(), BeanDefinitionBuilder.genericBeanDefinition(BeanScanner.class).getBeanDefinition());
+        log.debug("下载中心注册成功！");
+    }
 }
