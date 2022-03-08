@@ -5,7 +5,6 @@ import cn.hutool.core.util.ArrayUtil;
 import io.ggit.awesome.export.spring.BeanScanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.annotation.AnnotationAttributes;
@@ -25,9 +24,9 @@ public class DownloadCenterExportRegistrar implements ImportBeanDefinitionRegist
         String[] values = attributes != null ? attributes.getStringArray("value") : new String[0];
         String strValues = ArrayUtil.join(values, ",");
         if (CharSequenceUtil.isNotEmpty(strValues)) {
-            log.debug("下载中心注册-{}！", values);
+            log.debug("DownloadCenterExportRegistrar-{}！", values);
         }
-        registry.registerBeanDefinition(BeanScanner.class.getName(), BeanDefinitionBuilder.genericBeanDefinition(BeanScanner.class).getBeanDefinition());
-        log.debug("下载中心注册成功！");
+        BeanRegistrationUtil.registerBeanDefinitionIfNotExists(registry, BeanScanner.class.getName(), BeanScanner.class);
+        log.debug("DownloadCenterExportRegistrar do success！");
     }
 }
