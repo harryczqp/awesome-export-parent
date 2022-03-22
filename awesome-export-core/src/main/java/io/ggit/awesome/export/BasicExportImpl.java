@@ -1,5 +1,6 @@
 package io.ggit.awesome.export;
 
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONUtil;
 import io.ggit.awesome.export.model.ExportRequest;
@@ -18,9 +19,26 @@ import java.util.Map;
 public class BasicExportImpl {
 
 
+    public String export2Base64( Map<String, Object> request) {
+        File file = null;
+        try {
+            file = exportFile(request);
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        if (ObjectUtil.isNull(file)) {
+            throw new IllegalArgumentException("文件导出失败！");
+        }
+        //String fileString = BasicUtil.writeToBase64(file);
+        FileUtil.del(file);
+        //return fileString;
 
+        return "";
+    }
 
-    public File exportFile(Map<String, Object> request) throws InvocationTargetException, IllegalAccessException {
+    private File exportFile(Map<String, Object> request) throws InvocationTargetException, IllegalAccessException {
         ExportRequest exportRequest = BasicUtil.castToBean(request, ExportRequest.class);
         ScannedBean beanMap = exportRequest
                 .getScannedBean();
