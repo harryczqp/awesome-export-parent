@@ -31,11 +31,9 @@ public class BasicExportImpl {
         if (ObjectUtil.isNull(file)) {
             throw new IllegalArgumentException("文件导出失败！");
         }
-        //String fileString = BasicUtil.writeToBase64(file);
+        String fileString = BasicUtil.writeToBase64(file);
         FileUtil.del(file);
-        //return fileString;
-
-        return "";
+        return fileString;
     }
 
     private File exportFile(Map<String, Object> request) throws InvocationTargetException, IllegalAccessException {

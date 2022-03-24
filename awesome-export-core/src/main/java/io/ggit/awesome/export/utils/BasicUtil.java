@@ -1,9 +1,17 @@
 package io.ggit.awesome.export.utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import cn.hutool.core.codec.Base64;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.TypeUtil;
 import cn.hutool.json.JSONUtil;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -16,6 +24,27 @@ import java.util.List;
  */
 public class BasicUtil {
 
+    private static final Logger log = LoggerFactory.getLogger(BasicUtil.class);
+
+    private BasicUtil() {
+    }
+
+    /**
+     * excel转base64字符串
+     *
+     * @param file file
+     * @return base64字符串
+     */
+    public static String writeToBase64(File file) {
+        String base64 = "";
+
+        try (FileInputStream fileInputStream = new FileInputStream(file)) {
+            base64 = Base64.encode(new byte[fileInputStream.available()]);
+        } catch (IOException e) {
+            log.warn("excel转base64字符串失败:{}", e.getMessage());
+        }
+        return CharSequenceUtil.format("data:application/octet-stream;base64,{}", base64);
+    }
 
     /**
      * 优雅的转化为 list

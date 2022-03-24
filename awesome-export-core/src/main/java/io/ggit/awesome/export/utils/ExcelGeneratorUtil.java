@@ -20,6 +20,9 @@ import java.util.*;
  */
 public class ExcelGeneratorUtil {
 
+    private ExcelGeneratorUtil() {
+    }
+
     /**
      * 临时文件目录
      */

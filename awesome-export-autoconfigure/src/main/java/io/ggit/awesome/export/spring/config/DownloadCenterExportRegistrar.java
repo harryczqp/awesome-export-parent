@@ -16,7 +16,7 @@ import org.springframework.core.type.AnnotationMetadata;
  * @author harryczq
  */
 public class DownloadCenterExportRegistrar implements ImportBeanDefinitionRegistrar {
-    private static final Logger log = LoggerFactory.getLogger(BeanScanner.class);
+    private static final Logger log = LoggerFactory.getLogger(DownloadCenterExportRegistrar.class);
 
     @Override
     public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
