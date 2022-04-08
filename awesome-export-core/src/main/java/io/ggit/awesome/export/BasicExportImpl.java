@@ -54,23 +54,26 @@ public class BasicExportImpl {
      * @param request 请求信息
      * @return 文件
      */
-    private File exportFile(Map<String, Object> request)  {
+    protected File exportFile(Map<String, Object> request) {
         ExportRequest exportRequest = BasicUtil.castToBean(request, ExportRequest.class);
+        if (ObjectUtil.isNull(exportRequest)) {
+            throw new IllegalArgumentException("请检查请求参数！");
+        }
         ScannedBean beanMap = exportRequest
+                .checkExportRequestForExport()
+                .ifNotExistAutoGenerateExportDetail()
                 .getScannedBean();
         Object parameter = BasicUtil.castToBean(request, beanMap.getParameterType());
-        Object result = null;
         try {
-            result = beanMap.getMethod().invoke(beanMap.getBean(), parameter);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        List<?> list = BasicUtil.castList(result, BasicUtil.getMethodReturnListDefaultType(beanMap.getMethod()));
-        File file = ExcelGeneratorUtil.writeExcel(list, exportRequest.getExportDetail());
-        return file;
+            Object result = beanMap.getMethod().invoke(beanMap.getBean(), parameter);
+            List<?> list = BasicUtil.castList(result, BasicUtil.getMethodReturnListDefaultType(beanMap.getMethod()));
+            File file = ExcelGeneratorUtil.writeExcel(list, exportRequest.getExportDetail());
+            log.debug(FORMAT_LOG_STRING, "生成文件", file.getAbsolutePath());
+            return file;
+        } catch (InvocationTargetException | IllegalAccessException e) {
 
+        }
+        throw new IllegalArgumentException("生成导出文件失败，请查看日志！");
     }
 
 }
