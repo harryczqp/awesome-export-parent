@@ -1,4 +1,4 @@
-package io.ggit.awesome.export.spring;
+package io.ggit.awesome.export.model;
 
 import java.lang.annotation.*;
 

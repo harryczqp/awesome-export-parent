@@ -1,6 +1,8 @@
 package io.ggit.awesome.export;
 
+import cn.hutool.core.exceptions.ExceptionUtil;
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ObjectUtil;
 import io.ggit.awesome.export.model.ExportRequest;
 import io.ggit.awesome.export.model.ScannedBean;
@@ -16,6 +18,7 @@ import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author harryczq
@@ -71,9 +74,24 @@ public class BasicExportImpl {
             log.debug(FORMAT_LOG_STRING, "生成文件", file.getAbsolutePath());
             return file;
         } catch (InvocationTargetException | IllegalAccessException e) {
-
+            throwExceptionErrors(e);
         }
         throw new IllegalArgumentException("生成导出文件失败，请查看日志！");
+    }
+
+    /**
+     * 拦截异常信息
+     *
+     * @param e 异常
+     * @return 异常信息
+     */
+    protected String throwExceptionErrors(Exception e) {
+        List<String> exceptions = ExceptionUtil.getThrowableList(e).stream().map(Throwable::getMessage)
+                .filter(CharSequenceUtil::isNotEmpty).collect(Collectors.toList());
+        String errors = CharSequenceUtil.format(FORMAT_LOG_STRING, "导出失败", CharSequenceUtil.join(",", exceptions));
+        log.warn(errors);
+// TODO: 2022/4/12 可以自定义错误拦截 
+        return errors;
     }
 
 }

@@ -2,7 +2,7 @@ package io.ggit.awesome.export.spring.config;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ArrayUtil;
-import io.ggit.awesome.export.spring.BeanScanner;
+import io.ggit.awesome.export.utils.BeanScanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;

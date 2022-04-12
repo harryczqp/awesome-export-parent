@@ -9,6 +9,7 @@ import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.ReflectUtil;
 import io.ggit.awesome.export.utils.BasicUtil;
+import io.ggit.awesome.export.utils.BeanScanner;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -19,6 +20,7 @@ import java.util.List;
 
 /**
  * ExportRequest
+ *
  * @author harryczq
  */
 @ApiModel("标准导出请求体")
@@ -111,7 +113,9 @@ public class ExportRequest {
      * @return bean
      */
     public ScannedBean getScannedBean() {
-
+        if (scannedBean == null) {
+            initScannedBean();
+        }
         return scannedBean;
     }
 
@@ -145,4 +149,17 @@ public class ExportRequest {
         }
     }
 
+    /**
+     * 初始化注册的bean
+     *
+     * @return bean
+     */
+    private ScannedBean initScannedBean() {
+        ScannedBean bean = BeanScanner.getBeanMap(url);
+        if (bean == null) {
+            throw new IllegalArgumentException(CharSequenceUtil.format("未找到当前url:{}！", url));
+        }
+        scannedBean = bean;
+        return scannedBean;
+    }
 }

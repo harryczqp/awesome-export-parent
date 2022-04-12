@@ -1,5 +1,6 @@
-package io.ggit.awesome.export.spring;
+package io.ggit.awesome.export.utils;
 
+import io.ggit.awesome.export.model.CanBeExported;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import cn.hutool.core.annotation.AnnotationUtil;
@@ -38,6 +39,16 @@ public class BeanScanner implements ApplicationListener<ApplicationStartedEvent>
      * 扫描到的包
      */
     protected static final Map<String, ScannedBean> scannedBeanMap = MapUtil.newHashMap();
+
+    /**
+     * 获取注册的bean
+     *
+     * @param key key
+     * @return bean
+     */
+    public static ScannedBean getBeanMap(String key) {
+        return scannedBeanMap.getOrDefault(key, null);
+    }
 
     @Override
     public void onApplicationEvent(ApplicationStartedEvent event) {
