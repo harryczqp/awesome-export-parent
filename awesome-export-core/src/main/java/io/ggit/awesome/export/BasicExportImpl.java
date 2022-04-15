@@ -1,10 +1,12 @@
 package io.ggit.awesome.export;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.exceptions.ExceptionUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ObjectUtil;
 import io.ggit.awesome.export.model.ExportRequest;
+import io.ggit.awesome.export.model.ExportRequestTemplate;
 import io.ggit.awesome.export.model.ScannedBean;
 import io.ggit.awesome.export.utils.BasicUtil;
 import io.ggit.awesome.export.utils.ExcelGeneratorUtil;
@@ -52,6 +54,21 @@ public class BasicExportImpl {
     }
 
     /**
+     * 自动构建请求模板
+     *
+     * @param request 请求信息
+     * @return 请求模板
+     */
+    @ApiOperation("自动构建请求模板")
+    @PostMapping("autoBuildExportRequestTemplate")
+    public ExportRequestTemplate autoBuildExportRequestTemplate(@RequestBody ExportRequestTemplate request) {
+        ExportRequest exportRequest = BeanUtil.copyProperties(request, ExportRequest.class);
+        exportRequest.setSkipDetailChecked(Boolean.TRUE).checkExportRequestForExport().ifNotExistAutoGenerateExportDetail();
+        BeanUtil.copyProperties(exportRequest, request);
+        return request;
+    }
+
+    /**
      * 导出成文件
      *
      * @param request 请求信息
@@ -90,7 +107,7 @@ public class BasicExportImpl {
                 .filter(CharSequenceUtil::isNotEmpty).collect(Collectors.toList());
         String errors = CharSequenceUtil.format(FORMAT_LOG_STRING, "导出失败", CharSequenceUtil.join(",", exceptions));
         log.warn(errors);
-// TODO: 2022/4/12 可以自定义错误拦截 
+        // TODO: 2022/4/12 可以自定义错误拦截
         return errors;
     }
 

@@ -49,7 +49,7 @@ public class ExportRequest {
     /**
      * bean信息
      */
-    @ApiModelProperty(value = "跳过映射关系检查", hidden = true)
+    @ApiModelProperty(value = "bean信息", hidden = true)
     private ScannedBean scannedBean;
 
 
