@@ -10,11 +10,14 @@ import io.ggit.awesome.export.model.ExportRequestTemplate;
 import io.ggit.awesome.export.model.ScannedBean;
 import io.ggit.awesome.export.utils.BasicUtil;
 import io.ggit.awesome.export.utils.ExcelGeneratorUtil;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
@@ -25,6 +28,9 @@ import java.util.stream.Collectors;
 /**
  * @author harryczq
  */
+@Api(tags = "通用导出接口")
+@RequestMapping("/export")
+@RestController
 public class BasicExportImpl {
 
     private static final Logger log = LoggerFactory.getLogger(BasicExportImpl.class);
