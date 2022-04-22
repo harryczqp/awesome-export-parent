@@ -2,6 +2,7 @@ package io.ggit.awesome.export.spring.config;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ArrayUtil;
+import io.ggit.awesome.export.BasicExportImpl;
 import io.ggit.awesome.export.utils.BeanScanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +28,7 @@ public class DownloadCenterExportRegistrar implements ImportBeanDefinitionRegist
             log.debug("DownloadCenterExportRegistrar-{}！", values);
         }
         BeanRegistrationUtil.registerBeanDefinitionIfNotExists(registry, BeanScanner.class.getName(), BeanScanner.class);
+        BeanRegistrationUtil.registerBeanDefinitionIfNotExists(registry, BasicExportImpl.class.getName(), BasicExportImpl.class);
         log.debug("DownloadCenterExportRegistrar do success！");
     }
 }
