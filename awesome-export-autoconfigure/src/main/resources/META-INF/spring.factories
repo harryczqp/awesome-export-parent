@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+io.ggit.awesome.export.spring.config.DownloadCenterExportAutoConfiguration
