@@ -1,0 +1,11 @@
+{
+  "properties": [
+    {
+      "name": "io.ggit.awesome.export.auto-registration.enabled",
+      "type": "java.lang.Boolean",
+      "description": "是否启用导出组件",
+      "sourceType": "io.ggit.awesome.export.spring.config",
+      "defaultValue": "true"
+    }
+  ]
+}
