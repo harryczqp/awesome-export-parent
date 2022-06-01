@@ -18,28 +18,56 @@
 
 ### 架构介绍
 
-TODO
+#### 启动时序图
 
+![启动时序图](https://raw.githubusercontent.com/harryczqp/awesome-export-parent/master/pic/启动时序图.png)
 
+### 核心技术
+
+1. 启动时BeanScanner自动扫描带有@CanBeExported的注解 根据注解value和请求路径存储bean信息
+2. 启动后自动实现导出相关接口
+3. 调用导出接口时，根据url参数找到bean信息执行查询方法
+4. 得到数据集后，根据exportDetail参数 映射对应字段关系。若不想填写 也可以传入skipDetailChecked参数跳过
+5. 生成的文件会保存在临时文件夹中 备用
 
 ### 文件结构
 
-TODO
+```sh
+├─awesome-export-autoconfigure
+│  └─src
+│      └─main
+│          ├─java
+│          │  └─io.ggit.awesome.export
+│          │     └─spring
+│          │        └─config  //自动注册配置
+│          └─resources
+│              └─META-INF	  //spring.factories
+├─awesome-export-core
+│  └─src
+│      ├─main
+│      │  └─java
+│      │  	 └─io.ggit.awesome.export
+│      │         ├─model	//实体类
+│      │         └─utils	//工具类
+│      └─test
+│          └─java
+│              └─io.ggit.awesome.export
+│                 └─utils	//工具类
+└─pic
+```
 
-## 
+ 
 
 ### 核心技术
 
 1. 导出组件会自动实现以下接口
 
-   | 接口路径                               | 功能                                     | 备注                                        |
-   | -------------------------------------- | ---------------------------------------- | ------------------------------------------- |
-   | /export/autoBuildExportRequestTemplate | 自动构建请求模板                         |                                             |
-   | /export/export2Base64                  | 自动生成导出文件-导出为Base64            |                                             |
+   | 接口路径                               | 功能                          | 备注 |
+   | -------------------------------------- | ----------------------------- | ---- |
+   | /export/autoBuildExportRequestTemplate | 自动构建请求参数模板          |      |
+   | /export/export2Base64                  | 自动生成导出文件-导出为Base64 |      |
 
 
-
-## 
 
 ## 更新及规划
 
