@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class RequestLocationUtilTest {
     @Test
-    public void test() {
+    public void getLocationByMethodTest() {
         Method method = ReflectUtil.getMethod(IRequestLocationUtilTest.class, "getData");
         List<String> location = RequestLocationUtil.getLocationByMethod(method, RequestLocationUtil.RequestMethod.GET);
         System.out.println(CharSequenceUtil.join(",", location));
