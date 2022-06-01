@@ -6,11 +6,11 @@
 1. 添加pom引用
 
    ```xml
-   <dependency>
-         <groupId>com.suiyi</groupId>
-         <artifactId>scm-download-center-export-autoconfigure</artifactId>
-         <version>0.0.1-SNAPSHOT</version>
-   </dependency>
+        <dependency>
+            <groupId>io.ggit.awesome</groupId>
+            <artifactId>awesome-export-autoconfigure</artifactId>
+            <version>0.0.1-RC1</version>
+        </dependency>
    ```
 
 
